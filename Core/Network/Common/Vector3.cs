@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Core.Common
+namespace WeCraft.Core.Common
 {
     [ProtoContract]
     public class Vector3

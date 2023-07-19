@@ -1,6 +1,6 @@
 ﻿using NLog;
 
-namespace Core
+namespace WeCraft.Core
 {
     public class WeCraftCore
     {
@@ -9,7 +9,7 @@ namespace Core
         public WeCraftCore()
         {
             Handler = new NetworkHandler();
-            Logger = NLog.LogManager.GetCurrentClassLogger();
+            Logger = NLog.LogManager.GetCurrentClassLogger(); 
         }
  
     }

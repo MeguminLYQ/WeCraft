@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Core;
-using Core.Exception;
+using WeCraft.Core;
+using WeCraft.Core.Exception;
 
-namespace WeCraftServer.Network
+namespace WeCraft.Core.Network
 {
     public class Channel
     {
@@ -18,9 +18,33 @@ namespace WeCraftServer.Network
             this.Id = id;
         }
         
-        public void RegisterHandler()
+        public bool RegisterHandler(PackId id,NetworkHandler.Handle handle)
         {
+            if (Handlers.TryGetValue(id, out List<NetworkHandler.Handle> handles))
+            {
+                if (!handles.Contains(handle))
+                {
+                    handles.Add(handle);
+                    return true;
+                }
+            }
+            else
+            {
+                Handlers.Add(id,new List<NetworkHandler.Handle>(){handle});
+            }
+            return false;
         }
+
+        public bool RemoveHandler(PackId id, NetworkHandler.Handle handle)
+        {
+            if (Handlers.TryGetValue(id, out List<NetworkHandler.Handle> handles))
+            { 
+                handles.Remove(handle);
+                return true; 
+            }
+            return false;
+        }
+        
         /// <summary>
         /// 处理包可能出错,所以尽可能的先检测是否有,因为throw很消耗性能
         /// </summary>

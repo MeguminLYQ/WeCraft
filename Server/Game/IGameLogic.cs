@@ -1,4 +1,4 @@
-﻿namespace WeCraftServer.Game
+﻿namespace WeCraft.Core.Game
 {
     public interface IGameLogic
     {

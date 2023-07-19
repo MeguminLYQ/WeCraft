@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace WeCraft.Core
 {
     public enum PackId:uint
     {

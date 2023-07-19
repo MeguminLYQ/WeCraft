@@ -7,13 +7,15 @@
         <ProjectGuid>{015DE641-9361-4197-A370-8C4894EE7076}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Core</RootNamespace>
+        <RootNamespace>WeCraft.Core</RootNamespace>
         <AssemblyName>Core</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
-        <Nullable>enable</Nullable>
+        <Nullable>enable</Nullable> 
         <PostBuildEvent>copy Core.dll $(SolutionDir)Client\Assets\Dll\Core.dll</PostBuildEvent>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>git.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
       <OutputPath>bin\Debug\</OutputPath>
@@ -89,6 +91,7 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
+      <None Include="git.snk" />
       <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

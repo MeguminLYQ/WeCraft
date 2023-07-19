@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using Core;
+using WeCraft.Core;
 using NLog;
-using WeCraftServer.Game;
-using WeCraftServer.Network;
+using WeCraft.Core.Game;
+using WeCraft.Core.Network;
 
-namespace WeCraftServer
+namespace WeCraft.Core
 {
     public interface IServer
     {

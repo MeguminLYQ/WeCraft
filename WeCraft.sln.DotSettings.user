@@ -3,5 +3,8 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="E:\WeCraft\WeCraft\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll" /&gt;&#xD;
   &lt;Assembly Path="E:\WeCraft\WeCraft\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Users\kjk\.nuget\packages\protobuf-net\2.4.6" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Users\kjk\.nuget\packages\protobuf-net\3.2.26" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="E:\WeCraft\WeCraft\packages\protobuf-net.3.2.26" Loaded="True" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	</wpf:ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿namespace Core.Entity
+﻿namespace WeCraft.Core.Entity
 {
     public class LivingEntity: Entity
     {

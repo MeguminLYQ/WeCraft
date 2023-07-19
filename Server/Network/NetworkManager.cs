@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Net.Sockets.Kcp.Simple;
 using System.Threading.Tasks;
-using Core;
-using Core.Util;
+using WeCraft.Core;
+using WeCraft.Core.Util;
 using NLog;
 
-namespace WeCraftServer.Network
+namespace WeCraft.Core.Network
 {
     public class NetworkManager:INetworkManager
     { 
@@ -26,8 +26,11 @@ namespace WeCraftServer.Network
 
         protected async void UpdateNetwork()
         {
-            Connection.kcp.Update(DateTimeOffset.UtcNow);
-            await Task.Delay(50,this._server.CancelToken.Token);
+            while (!this._server.CancelToken.IsCancellationRequested)
+            {
+                Connection.kcp.Update(DateTimeOffset.UtcNow);
+                await Task.Delay(50,this._server.CancelToken.Token);
+            }
         }
 
         
@@ -39,22 +42,8 @@ namespace WeCraftServer.Network
         {
             while (!this._server.CancelToken.IsCancellationRequested)
             {
-                byte[] res=await Connection.ReceiveAsync();
-                int readPos = 0;
-                uint chanId = BitConverter.ToUInt32(res, readPos);
-                readPos += 4;
-                uint cmd=BitConverter.ToUInt32(res, readPos);
-                readPos += 4;
-                ArraySegment<byte> segment = new ArraySegment<byte>(res, readPos, res.Length - readPos);
-                if (!Handler.GetChannel(chanId, out Channel channel))
-                {
-                    this.Logger.Error($"网络找不到频道{chanId}");
-                }
-
-                if (!channel.HandlePacket(cmd, segment.Array))
-                {
-                    this.Logger.Error($"频道{chanId}找不到对应{cmd}的处理器");
-                }
+                byte[] res=await Connection.ReceiveAsync(); 
+                Handler.HandleBytes(res);
             }
         }
         
@@ -63,23 +52,10 @@ namespace WeCraftServer.Network
         /// </summary>
         /// <param name="id"></param>
         /// <param name="data"></param>
-        public async void Send(uint chanId,uint id,Object data)
+        public async void Send(uint chanId,uint id,object data)
         {
-            Packet packet = new Packet();
-            packet.Cmd = id;
-            packet.Channel = chanId;
-            packet.Data = PBUtil.Serialize(data); 
-            
-            var cmd=BitConverter.GetBytes(packet.Cmd);
-            var channel=BitConverter.GetBytes(packet.Channel);
-            int len = cmd.Length + channel.Length + packet.Data.Length;
-
-            List<byte> buffer = new List<byte>(len);
-            
-            buffer.AddRange(channel);
-            buffer.AddRange(cmd);
-            buffer.AddRange(packet.Data); 
-            Connection.SendAsync(buffer.ToArray(),len);
+            var bytes = Handler.GetSendBytes(chanId, id, data);
+            Connection.SendAsync(bytes,bytes.Length);
         }
 
         public async void Send(uint chanId, PackId id, object data)

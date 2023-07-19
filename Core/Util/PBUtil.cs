@@ -2,7 +2,7 @@
 using System.IO;
 using ProtoBuf;
 
-namespace Core.Util
+namespace WeCraft.Core.Util
 {
     public static class PBUtil
     {

@@ -2,13 +2,13 @@
 using System.Net.Sockets.Kcp.Simple;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using Core;
+using WeCraft.Core;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
-using WeCraftServer.Game;
-using WeCraftServer.Network;
+using WeCraft.Core.Game;
+using WeCraft.Core.Network;
 
-namespace WeCraftServer
+namespace WeCraft.Core
 {
     internal class WeCraftServer
     {
@@ -16,7 +16,7 @@ namespace WeCraftServer
         public readonly ServiceProvider ServiceProvider;
         public readonly IServer? Server;
         public readonly ILogger? Logger;
-        public readonly WeCraftCore? Core;
+        public readonly WeCraft.Core.WeCraftCore? Core;
 
         public WeCraftServer()
         {
@@ -25,19 +25,19 @@ namespace WeCraftServer
             serviceCollection.AddSingleton<ISetting, Setting>();
             serviceCollection.AddSingleton<IServer,Server>(); 
             serviceCollection.AddSingleton<ILogger>(LogManager.GetLogger("WeCraft"));
-            serviceCollection.AddSingleton<WeCraftCore>(new WeCraftCore());
+            serviceCollection.AddSingleton<WeCraft.Core.WeCraftCore>(new WeCraft.Core.WeCraftCore());
             ServiceProvider = serviceCollection.BuildServiceProvider(); 
             Server = ServiceProvider.GetService<IServer>();
             Logger = ServiceProvider.GetService<ILogger>();
-            Core = ServiceProvider.GetService<WeCraftCore>();
+            Core = ServiceProvider.GetService<WeCraft.Core.WeCraftCore>();
             if (this.Server == null)
             {
-                throw new Exception("错误,找不到合适的服务器实例");
+                throw new System.Exception("错误,找不到合适的服务器实例");
             }
 
             if (this.Logger == null)
             {
-                throw new Exception("错误,找不到合适的日志系统");
+                throw new System.Exception("错误,找不到合适的日志系统");
             } 
         }
         public static void Main(string[] args)

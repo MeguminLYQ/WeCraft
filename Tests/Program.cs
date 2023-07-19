@@ -8,7 +8,7 @@ namespace Tests
         static void Main(string[] args)
         {
             A a=new C();
-            a.M();
+            Console.WriteLine(typeof(A).IsAssignableFrom(typeof(C)));
         }
 
         public class A

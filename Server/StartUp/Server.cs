@@ -2,24 +2,29 @@
 using System.Net.Sockets.Kcp.Simple;
 using System.Threading;
 using System.Threading.Tasks;
-using Core;
+using WeCraft.Core;
 using NLog;
-using WeCraftServer.Game;
-using WeCraftServer.Network;
+using WeCraft.Core.Game;
+using WeCraft.Core.Network;
+using WeCraft.Core.Plugin;
 
-namespace WeCraftServer
+namespace WeCraft.Core
 {
     public class Server: IServer
     {
+        //todo: 这些以后可以用DI, 来让插件获取其他插件之类的.
         public ISetting Setting { get; protected set; }
         public ILogger Logger { get; protected set; }
-        public WeCraftCore Core { get; protected set; }
+        public WeCraft.Core.WeCraftCore Core { get; protected set; }
         public IGameLogic GameLogic { get; protected set; }
         public INetworkManager NetworkManager { get; protected set; }
+        
+        public IPluginManager PluginManager { get; protected set; }
+        
         public readonly int MsPerTick;
         public CancellationTokenSource CancelToken { get; protected set; }
 
-        public Server(ILogger logger, ISetting setting,WeCraftCore core)
+        public Server(ILogger logger, ISetting setting,WeCraft.Core.WeCraftCore core)
         {
             //init value
             this.Setting = setting;
@@ -31,6 +36,9 @@ namespace WeCraftServer
             //set up manager
             this.GameLogic = new GameLogic(this);
             this.NetworkManager = new NetworkManager(this);
+            this.PluginManager = new PluginManager(this);
+            
+
         }
         public void Run()
         {

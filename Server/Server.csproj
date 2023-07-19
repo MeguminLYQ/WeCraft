@@ -78,7 +78,6 @@
         <Compile Include="Game\GameLogic.cs" />
         <Compile Include="Game\IGameLogic.cs" />
         <Compile Include="ITickable.cs" />
-        <Compile Include="Network\Handler.cs" />
         <Compile Include="Network\INetworkManager.cs" />
         <Compile Include="Network\NetworkManager.cs" />
         <Compile Include="Nullable\AllowNullAttribute.cs" />
@@ -92,6 +91,11 @@
         <Compile Include="Nullable\NotNullAttribute.cs" />
         <Compile Include="Nullable\NotNullIfNotNullAttribute.cs" />
         <Compile Include="Nullable\NotNullWhenAttribute.cs" />
+        <Compile Include="Plugin\IPluginManager.cs" />
+        <Compile Include="Plugin\PluginBase.cs" />
+        <Compile Include="Plugin\PluginManager.cs" />
+        <Compile Include="Plugin\Root\RootNetworkHandler.cs" />
+        <Compile Include="Plugin\Root\RootPlugin.cs" />
         <Compile Include="WeCraftServer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="StartUp\IServer.cs" />

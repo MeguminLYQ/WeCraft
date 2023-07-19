@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Core.C2S
+namespace WeCraft.Core.C2S
 {
     [ProtoContract]
     public class C2S_Ping

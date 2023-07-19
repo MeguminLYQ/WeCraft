@@ -1,7 +1,7 @@
-﻿using Core.Common;
-using ProtoBuf;
+﻿using ProtoBuf;
+using WeCraft.Core.Common;
 
-namespace Core.C2S
+namespace WeCraft.Core.C2S
 {
     [ProtoContract]
     public class C2S_PlayerMovement

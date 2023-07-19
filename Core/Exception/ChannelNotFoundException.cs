@@ -1,4 +1,4 @@
-﻿namespace Core.Exception
+﻿namespace WeCraft.Core.Exception
 {
     public class ChannelNotFoundException: System.Exception
     {

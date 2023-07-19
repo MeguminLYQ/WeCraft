@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Core.Entity
+namespace WeCraft.Core.Entity
 {
     public class Entity
     {
