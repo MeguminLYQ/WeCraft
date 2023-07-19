@@ -13,7 +13,7 @@
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
         <Nullable>enable</Nullable> 
-        <PostBuildEvent>copy Core.dll $(SolutionDir)Client\Assets\Dll\Core.dll</PostBuildEvent>
+        <PostBuildEvent>copy Core.dll $(SolutionDir)Client\Assets\DLLs\Core.dll</PostBuildEvent>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>git.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>

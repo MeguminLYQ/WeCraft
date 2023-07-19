@@ -29,7 +29,7 @@ namespace WeCraft.Core.Network
             while (!this._server.CancelToken.IsCancellationRequested)
             {
                 Connection.kcp.Update(DateTimeOffset.UtcNow);
-                await Task.Delay(50,this._server.CancelToken.Token);
+                await Task.Delay(10,this._server.CancelToken.Token);
             }
         }
 
@@ -52,13 +52,13 @@ namespace WeCraft.Core.Network
         /// </summary>
         /// <param name="id"></param>
         /// <param name="data"></param>
-        public async void Send(uint chanId,uint id,object data)
+        public void Send(uint chanId,uint id,object data)
         {
             var bytes = Handler.GetSendBytes(chanId, id, data);
             Connection.SendAsync(bytes,bytes.Length);
         }
 
-        public async void Send(uint chanId, PackId id, object data)
+        public void Send(uint chanId, PackId id, object data)
         {
             Send(chanId,(uint)id,data);
         }
