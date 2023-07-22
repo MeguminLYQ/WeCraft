@@ -3,7 +3,10 @@
     public interface ISetting
     {
         public string Ip { get; }
-        public int Port {get;}
-        public int TickRate { get; }
+        public ushort Port {get;}
+        /// <summary>
+        /// tick per second
+        /// </summary>
+        public byte TickRate { get; }
     }
 } 

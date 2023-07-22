@@ -4,9 +4,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{015DE641-9361-4197-A370-8C4894EE7076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kcp", "..\KCP\Kcp\Kcp.csproj", "{EEC01997-4F95-46E1-B9B3-AD9406F0C6FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TstClient", "TstClient\TstClient.csproj", "{9732D234-A46D-4799-A692-7E4F61776E2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9732D234-A46D-4799-A692-7E4F61776E2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TstServer", "TstServer\TstServer.csproj", "{379A5CE6-F382-4DDB-9969-407B1F7827C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiptideNetworking", "..\Riptide\RiptideNetworking\RiptideNetworking\RiptideNetworking.csproj", "{5F71B09B-ACDD-471A-BFEE-4E6053762ED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,13 +24,17 @@ Global
 		{015DE641-9361-4197-A370-8C4894EE7076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{015DE641-9361-4197-A370-8C4894EE7076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{015DE641-9361-4197-A370-8C4894EE7076}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEC01997-4F95-46E1-B9B3-AD9406F0C6FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC01997-4F95-46E1-B9B3-AD9406F0C6FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEC01997-4F95-46E1-B9B3-AD9406F0C6FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEC01997-4F95-46E1-B9B3-AD9406F0C6FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9732D234-A46D-4799-A692-7E4F61776E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9732D234-A46D-4799-A692-7E4F61776E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9732D234-A46D-4799-A692-7E4F61776E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9732D234-A46D-4799-A692-7E4F61776E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379A5CE6-F382-4DDB-9969-407B1F7827C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379A5CE6-F382-4DDB-9969-407B1F7827C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379A5CE6-F382-4DDB-9969-407B1F7827C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379A5CE6-F382-4DDB-9969-407B1F7827C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F71B09B-ACDD-471A-BFEE-4E6053762ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F71B09B-ACDD-471A-BFEE-4E6053762ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F71B09B-ACDD-471A-BFEE-4E6053762ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F71B09B-ACDD-471A-BFEE-4E6053762ED9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -7,18 +7,18 @@ namespace WeCraft.Core.Network
     public class Channel
     {
         public string Name;
-        public uint Id;
-        public Dictionary<PackId, List<NetworkHandler.Handle>> Handlers=new Dictionary<PackId, List<NetworkHandler.Handle>>();
+        public ushort Id;
+        protected Dictionary<ushort, List<NetworkHandler.Handle>> Handlers=new Dictionary<ushort, List<NetworkHandler.Handle>>();
 
         protected Channel(){}
 
-        public Channel(string name, uint id)
+        public Channel(string name, ushort id)
         {
             this.Name = name;
             this.Id = id;
         }
         
-        public bool RegisterHandler(PackId id,NetworkHandler.Handle handle)
+        public bool RegisterHandler(ushort id,NetworkHandler.Handle handle)
         {
             if (Handlers.TryGetValue(id, out List<NetworkHandler.Handle> handles))
             {
@@ -35,7 +35,7 @@ namespace WeCraft.Core.Network
             return false;
         }
 
-        public bool RemoveHandler(PackId id, NetworkHandler.Handle handle)
+        public bool RemoveHandler(ushort id, NetworkHandler.Handle handle)
         {
             if (Handlers.TryGetValue(id, out List<NetworkHandler.Handle> handles))
             { 
@@ -48,27 +48,27 @@ namespace WeCraft.Core.Network
         /// <summary>
         /// 处理包可能出错,所以尽可能的先检测是否有,因为throw很消耗性能
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="packId"></param>
         /// <param name="data"></param>
         /// <exception cref="E"></exception>
-        public bool HandlePacket(PackId id, byte[] data)
+        public bool HandlePacket(ushort clientId,ushort packId, byte[] data)
         {
-            bool hasHandler = Handlers.TryGetValue(id, out var handles);
+            bool hasHandler = Handlers.TryGetValue(packId, out var handles);
             if (!hasHandler)
                 return false;
             for (var i = Handlers.Count - 1; i >= 0; i--)
             {
                 if (handles[i] != null)
                 {
-                    handles[i].Invoke(data);
+                    handles[i].Invoke(clientId,data);
                 }
             } 
             return true;
         }
 
-        public bool HandlePacket(uint id, byte[] data)
+        public bool HandlePacket(ushort clientId,PackId packId, byte[] data)
         {
-            return HandlePacket((PackId)id,data);   
+            return HandlePacket(clientId,packId,data);   
         }
     }
 }

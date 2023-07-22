@@ -12,7 +12,7 @@
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
-        <Nullable>enable</Nullable> 
+        <Nullable>disable</Nullable> 
         <PostBuildEvent>copy Core.dll $(SolutionDir)Client\Assets\DLLs\Core.dll</PostBuildEvent>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>git.snk</AssemblyOriginatorKeyFile>

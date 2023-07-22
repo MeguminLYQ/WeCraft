@@ -20,12 +20,12 @@ namespace WeCraft.Core.Plugin
         public override void OnEnable()
         {
             Handler = new RootNetworkHandler(this);
-            DefaultChannel.RegisterHandler(PackId.C2S_Ping,Handler.HandlePing);  
+            DefaultChannel.RegisterHandler((ushort)PackId.C2S_Ping,Handler.HandlePing);  
         }
 
         public override void OnDisable()
         {
-            DefaultChannel.RemoveHandler(PackId.C2S_Ping,Handler.HandlePing);
+            DefaultChannel.RemoveHandler((ushort)PackId.C2S_Ping,Handler.HandlePing);
         }
     }
 }

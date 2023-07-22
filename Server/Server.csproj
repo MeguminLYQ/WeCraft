@@ -13,7 +13,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <LangVersion>9</LangVersion>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Git.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
@@ -104,9 +104,9 @@
         <Compile Include="StartUp\Setting.cs" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\KCP\Kcp\Kcp.csproj">
-        <Project>{eec01997-4f95-46e1-b9b3-ad9406f0c6ff}</Project>
-        <Name>Kcp</Name>
+      <ProjectReference Include="..\..\Riptide\RiptideNetworking\RiptideNetworking\RiptideNetworking.csproj">
+        <Project>{5f71b09b-acdd-471a-bfee-4e6053762ed9}</Project>
+        <Name>RiptideNetworking</Name>
       </ProjectReference>
       <ProjectReference Include="..\Core\Core.csproj">
         <Project>{015de641-9361-4197-a370-8c4894ee7076}</Project>

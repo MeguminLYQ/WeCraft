@@ -12,14 +12,14 @@ namespace WeCraft.Core.Plugin
         {
             this.plugin = rootPlugin;
         }
-        public void HandlePing(byte[] data)
+        public void HandlePing(ushort clientId,byte[] data)
         {
             var ping=PBUtil.Deserialize<C2S_Ping>(data);
             S2C_Pong pong = new S2C_Pong()
             {
-                msg = ping.msg + "|pong"
+                msg = ping.msg + "|pong|"+clientId
             };
-            plugin.NetworkManager.Send(plugin.DefaultChannel.Id,PackId.S2C_Pong,pong);
+            plugin.NetworkManager.Send(new []{clientId},plugin.DefaultChannel.Id,PackId.S2C_Pong,pong);
         }
     }
 }
