@@ -5,5 +5,13 @@
         public float Health;
         public float MaxHealth; 
         public float Yaw;
+        /// <summary>
+        /// HUD的名字,可以和Name不一样
+        /// </summary>
+        public string DisplayName;
+
+        public LivingEntity(uint id):base(id)
+        {
+        }
     }
 }

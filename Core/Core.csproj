@@ -62,32 +62,51 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Block\Block.cs" />
+        <Compile Include="Block\BlockDefiniation.cs" />
         <Compile Include="Entity\Entity.cs" />
+        <Compile Include="Entity\EntityDefinition.cs" />
+        <Compile Include="Entity\IPlayer.cs" />
         <Compile Include="Entity\LivingEntity.cs" />
+        <Compile Include="Entity\NpcEntity.cs" />
         <Compile Include="Entity\Player.cs" />
+        <Compile Include="EventHandler\Event.cs" />
         <Compile Include="EventHandler\EventHandler.cs" />
         <Compile Include="EventHandler\EventNames.cs" />
+        <Compile Include="EventHandler\EventPriority.cs" />
+        <Compile Include="EventHandler\EventResult.cs" />
+        <Compile Include="EventHandler\ICancellable.cs" />
         <Compile Include="EventHandler\InvokableAction.cs" />
+        <Compile Include="EventHandler\PlayerJoinEvent.cs" />
         <Compile Include="Exception\ChannelNotFoundException.cs" />
         <Compile Include="Exception\HandlerNotFoundException.cs" />
         <Compile Include="GameLogic\IGameLogic.cs" />
         <Compile Include="IWeCraftCore.cs" />
+        <Compile Include="Math\BoundsUShort.cs" />
+        <Compile Include="Math\Location.cs" />
+        <Compile Include="Math\Vector2Int.cs" />
+        <Compile Include="Math\Vector2UShort.cs" />
+        <Compile Include="Math\Vector3.cs" />
+        <Compile Include="Math\Vector3Int.cs" />
+        <Compile Include="Math\Vector3Short.cs" />
+        <Compile Include="Math\Vector3UShort.cs" />
         <Compile Include="Mod\IMod.cs" />
         <Compile Include="Mod\IModManager.cs" />
         <Compile Include="Mod\ModBase.cs" />
         <Compile Include="Mod\ModId.cs" />
         <Compile Include="Network\C2S\C2S_Ping.cs" />
+        <Compile Include="Network\C2S\C2S_PlayerLogin.cs" />
         <Compile Include="Network\C2S\C2S_PlayerProfile.cs" />
         <Compile Include="Network\C2S\C2S_PlayerMovement.cs" />
         <Compile Include="Network\C2S\C2S_QueryChunkData.cs" />
         <Compile Include="Network\Channel.cs" />
-        <Compile Include="Network\Common\Vector3.cs" />
         <Compile Include="Network\INetworkManager.cs" />
         <Compile Include="Network\NetworkHandler.cs" />
         <Compile Include="Network\Packet.cs" />
         <Compile Include="Network\PackId.cs" />
         <Compile Include="Network\S2C\S2C_Pong.cs" />
+        <Compile Include="Network\S2C\S2C_QueryChunkData.cs" />
         <Compile Include="Network\S2C\S2C_SpawnEntity.cs" />
+        <Compile Include="Network\S2C\S2C_SpawnPlayerEntity.cs" />
         <Compile Include="Nullable\AllowNullAttribute.cs" />
         <Compile Include="Nullable\DisallowNullAttribute.cs" />
         <Compile Include="Nullable\DoesNotReturnAttribute.cs" />
@@ -107,11 +126,21 @@
         <Compile Include="Utility\GenericObjectPool.cs" />
         <Compile Include="Utility\ProtobufUtility.cs" />
         <Compile Include="WeCraftCore.cs" />
+        <Compile Include="World\Chunk.cs" />
+        <Compile Include="World\World.cs" />
+        <Compile Include="World\WorldDefinition.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
       <None Include="git.snk" />
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="EventHandler\todo.md" />
+      <Content Include="World\世界设计.md" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Network\Common\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

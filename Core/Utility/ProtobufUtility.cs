@@ -15,12 +15,12 @@ namespace WeCraft.Core.Utility
             }
             catch (System.Exception e)
             {
-                WeCraftCore.Instance.LoggerImpl.Error(e);
+                WeCraftCore.CoreImpl.LoggerImpl.Error(e);
                 return new byte[]{};
             }
         }
 
-        public static T? Deserialize<T>(byte[] bytesData)
+        public static T Deserialize<T>(byte[] bytesData)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace WeCraft.Core.Utility
             }
             catch (System.Exception e)
             {
-                WeCraftCore.Instance.LoggerImpl.Error(e);
+                WeCraftCore.CoreImpl.LoggerImpl.Error(e);
             }
 
             return default(T);

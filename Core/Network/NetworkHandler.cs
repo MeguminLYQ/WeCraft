@@ -62,6 +62,7 @@ namespace WeCraft.Core.Network
         
         public bool RegisterChannel(string name, out Channel channel)
         {
+            WeCraftCore.CoreImpl.LoggerImpl.Warn("尝试注册频道而不指定Id,这非常危险,可能导致接收不到消息,因为id是自动分配的");
             channel = default;
             ushort maxValue = UInt16.MinValue;
             foreach (var chan in Channels)
@@ -73,14 +74,14 @@ namespace WeCraft.Core.Network
                     maxValue = chan.Id;
                 }
             }
-
+            
             try
             {
                 maxValue += 1;
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                WeCraftCore.Instance.LoggerImpl.Error("自动注册失败, 似乎所有id已经注册满了?");
+                WeCraftCore.CoreImpl.LoggerImpl.Error("自动注册失败, 似乎所有id已经注册满了?");
             }
             
             channel = new Channel(name,maxValue);
@@ -135,15 +136,15 @@ namespace WeCraft.Core.Network
         {
             if (!GetChannel(chanId, out Channel channel))
             {
-                WeCraftCore.Instance.LoggerImpl.Error($"网络找不到频道{chanId}");
+                WeCraftCore.CoreImpl.LoggerImpl.Error($"网络找不到频道{chanId}");
                 return;
             }
             if (!channel.HandlePacket(clientId,packId, data))
             {
-                WeCraftCore.Instance.LoggerImpl.Error($"频道{chanId}找不到对应{packId}的处理器");
+                WeCraftCore.CoreImpl.LoggerImpl.Error($"频道{chanId}找不到对应{packId}的处理器");
                 return;
             } 
-            WeCraftCore.Instance.LoggerImpl.Debug($"处理{chanId}:{packId}包");
+            WeCraftCore.CoreImpl.LoggerImpl.Debug($"处理{chanId}:{packId}包");
         }
         
     }

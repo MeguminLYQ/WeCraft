@@ -11,7 +11,7 @@ namespace WeCraft.Foundation
         public FoundationMod()
         {
             Name = "Foundation";
-            NetworkManager = WeCraftCore.Instance.NetworkManagerImpl;
+            NetworkManager = WeCraftCore.CoreImpl.NetworkManagerImpl;
         }
 
 
@@ -22,12 +22,25 @@ namespace WeCraft.Foundation
         public override void OnEnable()
         {
             Handler = new RootNetworkHandler(this);
-            DefaultChannel.RegisterHandler((ushort)PackId.C2S_Ping,Handler.HandlePing);  
+            if (WeCraftCore.CoreImpl.IsClient)
+            {
+                // DefaultChannel.RegisterHandler((ushort)PackId.C2S_Ping,Handler.HandleC2SPing);
+                // DefaultChannel.RegisterHandler((ushort)PackId.C2S_PlayerProfile,Handler.HandleC2SPlayerProfile);
+            }
+            if (WeCraftCore.CoreImpl.IsServer)
+            {  
+            }
         }
 
         public override void OnDisable()
         {
-            DefaultChannel.RemoveHandler((ushort)PackId.C2S_Ping,Handler.HandlePing);
+            if (WeCraftCore.CoreImpl.IsClient)
+            {
+                // DefaultChannel.RemoveHandler((ushort)PackId.C2S_Ping,Handler.HandleC2SPing);
+                // DefaultChannel.RegisterHandler((ushort)PackId.C2S_PlayerProfile,Handler.HandleC2SPlayerProfile);
+            }
+            
         }
+ 
     }
 }

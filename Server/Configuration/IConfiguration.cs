@@ -1,6 +1,6 @@
 ﻿namespace WeCraftServer.Configuration
 {
-    public interface ISetting
+    public interface IConfiguration
     {
         public string Ip { get; }
         public ushort Port {get;}
@@ -8,5 +8,10 @@
         /// tick per second
         /// </summary>
         public byte TickRate { get; }
+
+        public ushort MaxPlayers { get;}
+        
+        public string DefaultWorld { get; }
+        public WorldSection[] Worlds { get; }
     }
 } 

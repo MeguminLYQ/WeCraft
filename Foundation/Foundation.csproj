@@ -38,9 +38,14 @@
       <PostBuildEvent>copy Foundation.dll $(SolutionDir)Client\Assets\DLLs\Foundation.dll</PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+          <HintPath>..\packages\NLog.5.2.2\lib\net46\NLog.dll</HintPath>
+        </Reference>
         <Reference Include="System" />
+        <Reference Include="System.Configuration" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.IO.Compression" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
@@ -58,6 +63,8 @@
       <Content Include="Readme.MD" />
     </ItemGroup>
     <ItemGroup>
+      <None Include="App.config" />
+      <None Include="packages.config" />
       <None Include="sign.snk" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

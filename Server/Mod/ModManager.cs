@@ -1,6 +1,7 @@
 ﻿ 
 using WeCraft.Core.Mod;
 using WeCraft.Foundation;
+using WeCraftServer.EmbeddedMod;
 
 namespace WeCraftServer.Mod
 {
@@ -31,18 +32,18 @@ namespace WeCraftServer.Mod
         public void Load()
         {
             Mods = LoadAllMod();
-            Server.LoggerImpl.Info("开始加载插件");
+            Server.LoggerImpl.Info("开始加载MOD件");
             foreach (var pluginBase in Mods)
             {
                 Server.LoggerImpl.Info($"开始加载{pluginBase.Name}");
                 pluginBase.OnEnable();
             }
             
-            Server.LoggerImpl.Info("插件加载完成");
+            Server.LoggerImpl.Info("MOD加载完成");
         }
         protected ModBase[] LoadAllMod()
         {
-            return new ModBase[] { new FoundationMod() };
+            return new ModBase[] { new FoundationMod() ,new ServerEmbeddedMod()};
         }
     }
 }

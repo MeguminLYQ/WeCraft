@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NLog;
+using Riptide;
 using WeCraft.Core;
+using WeCraft.Core.Entity;
 using WeCraft.Core.Network;
+using WeCraft.Core.World;
 using WeCraftServer.Configuration;
 using WeCraftServer.Mod;
 using WeCraftServer.Network;
+using WeCraftServer.Utility;
 
 namespace WeCraftServer
 {
@@ -14,37 +19,50 @@ namespace WeCraftServer
     {
         protected static WeCraftServer ServerInstance;
         //todo: 这些以后可以用DI, 来让插件获取其他插件之类的.
-        public ISetting Setting { get; protected set; }
+        public IConfiguration Configuration { get; protected set; }
         public CancellationTokenSource CancelToken { get; set; }
+        public NetworkManager NetworkManager { get; protected set; }
 
-        public readonly int MsPerTick; 
+        public readonly int MsPerTick;
+ 
+        public Dictionary<Connection, Player> OnlinePlayers { get; private set; }
+
+        public HashSet<World> Worlds { get; private set; }
 
         protected WeCraftServer()
         {
+            
+            CoreImpl = this;
+            ServerInstance = this;
+            
             //init value
-            this.Setting = new Setting();
+            this.Configuration = new Configuration.Configuration();
             this.LoggerImpl = LogManager.GetLogger("WeCraftServer"); 
             this.CancelToken = new CancellationTokenSource();
-            this.MsPerTick = 1000 / this.Setting.TickRate;
+            this.MsPerTick = 1000 / this.Configuration.TickRate;
             this.IsServer = true;
+            this.OnlinePlayers = new Dictionary<Connection, Player>(Configuration.MaxPlayers,new ConnectionComparer());
             //set up manager
             this.GameLogicImpl = new global::WeCraftServer.Game.GameLogic(this);
-            this.NetworkManagerImpl = new NetworkManager(this);
+            this.NetworkManager = new NetworkManager(this);
+            this.NetworkManagerImpl = NetworkManager;
             this.ModManagerImpl = new ModManager(this);
             this.NetworkHandlerImpl = new NetworkHandler();
             this.CancelToken = new CancellationTokenSource();
-
+            
+            
             (this.ModManagerImpl as ModManager).Load();
-
+            Worlds = new HashSet<World>()
+            {
+                new World(this.Configuration.Worlds[0].Name)
+            };
         }
 
         public static WeCraftServer GetInstance()
         {
-            if (Instance == null)
+            if (CoreImpl == null)
             {
                 var weCraftServer = new WeCraftServer();
-                Instance = weCraftServer;
-                ServerInstance = weCraftServer;
             }
 
             return ServerInstance;
@@ -52,8 +70,8 @@ namespace WeCraftServer
         
         public void Run()
         {
-            LoggerImpl.Info($"Server is running on {Setting.Ip}:{Setting.Port}");
-            LoggerImpl.Info($"Tick-Rate {Setting.TickRate}");
+            LoggerImpl.Info($"Server is running on {Configuration.Ip}:{Configuration.Port}");
+            LoggerImpl.Info($"Tick-Rate {Configuration.TickRate}");
             LoggerImpl.Info($"Ms-Per-Tick {MsPerTick}");
             Tick();
         }
@@ -82,6 +100,52 @@ namespace WeCraftServer
                     }
                 }
             }
+        }
+
+        public bool GetPlayer(Connection con,out Player player)
+        {
+            return OnlinePlayers.TryGetValue(con, out player);
+        }
+
+        public bool GetPlayer(string name, out Player player)
+        {
+            player = default;
+            foreach (var onlinePlayersValue in OnlinePlayers.Values)
+            {
+                if (onlinePlayersValue.Name == name)
+                {
+                    player = onlinePlayersValue;
+                    return true;
+                }
+            } 
+            return false;
+        }
+        public bool GetPlayer(Guid name, out Player player)
+        {
+            player = default;
+            foreach (var onlinePlayersValue in OnlinePlayers.Values)
+            {
+                if (onlinePlayersValue.Guid == name)
+                {
+                    player = onlinePlayersValue;
+                    return true;
+                }
+            } 
+            return false;
+        }
+
+        public bool GetWorld(string name,out World world)
+        {
+            world = default;
+            foreach (var world1 in Worlds)
+            {
+                if (world1.Name.Equals(name))
+                {
+                    world = world1;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

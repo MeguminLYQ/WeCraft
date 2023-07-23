@@ -75,6 +75,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Configuration\WorldConfiguration.cs" />
+        <Compile Include="EmbeddedMod\ServerEmbeddedEventHandler.cs" />
+        <Compile Include="EmbeddedMod\ServerEmbeddedMod.cs" />
+        <Compile Include="EmbeddedMod\ServerEmbeddedNetworkHandler.cs" />
         <Compile Include="Game\GameLogic.cs" />
         <Compile Include="ITickable.cs" />
         <Compile Include="Network\NetworkManager.cs" />
@@ -90,10 +94,12 @@
         <Compile Include="Nullable\NotNullIfNotNullAttribute.cs" />
         <Compile Include="Nullable\NotNullWhenAttribute.cs" />
         <Compile Include="Mod\ModManager.cs" />
+        <Compile Include="ServerEventNames.cs" />
         <Compile Include="StartUp.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Configuration\ISetting.cs" />
-        <Compile Include="Configuration\Setting.cs" />
+        <Compile Include="Configuration\IConfiguration.cs" />
+        <Compile Include="Configuration\Configuration.cs" />
+        <Compile Include="Utility\ConnectionComparer.cs" />
         <Compile Include="WeCraftServer.cs" />
     </ItemGroup>
     <ItemGroup>

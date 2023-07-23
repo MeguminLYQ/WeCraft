@@ -9,7 +9,7 @@ namespace WeCraft.Core
     public abstract class WeCraftCore: IWeCraftCore
     {
         
-        public static IWeCraftCore Instance;
+        public static IWeCraftCore CoreImpl;
         public IModManager ModManagerImpl { get; protected set; }
         public INetworkManager NetworkManagerImpl { get; protected set; }
         public ILogger LoggerImpl { get; protected set; } 
@@ -22,11 +22,11 @@ namespace WeCraft.Core
 
         protected WeCraftCore()
         {
-            if (Instance != null)
+            if (CoreImpl != null)
             {
                 LoggerImpl.Error("已经存在WeCraftCore实例");
             }
-            Instance = this;
+            CoreImpl = this;
         }
     }
 }

@@ -201,12 +201,12 @@ namespace WeCraft.Core.EventHandler
     {
       if (index < 0 || index >= actions.Count)
       {
-        WeCraftCore.Instance.LoggerImpl.Error((object) string.Format("Error: The event '{0}' is out of range with an index value of {1} out of {2}.", (object) eventName, (object) index, (object) actions.Count));
+        WeCraftCore.CoreImpl.LoggerImpl.Error((object) string.Format("Error: The event '{0}' is out of range with an index value of {1} out of {2}.", (object) eventName, (object) index, (object) actions.Count));
         return (T) null;
       }
       if (actions[index] is T)
         return actions[index] as T;
-      WeCraftCore.Instance.LoggerImpl.Error((object) string.Format("Error: The event '{0}' with type {1} but {2} was expected.", (object) eventName, (object) actions[index].GetType(), (object) typeof (T)));
+      WeCraftCore.CoreImpl.LoggerImpl.Error((object) string.Format("Error: The event '{0}' with type {1} but {2} was expected.", (object) eventName, (object) actions[index].GetType(), (object) typeof (T)));
       return (T) null;
     }
 
