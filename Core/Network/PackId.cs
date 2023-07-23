@@ -1,4 +1,4 @@
-﻿namespace WeCraft.Core
+﻿namespace WeCraft.Core.Network
 {
     public enum PackId:ushort
     {

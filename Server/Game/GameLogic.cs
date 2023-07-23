@@ -1,13 +1,14 @@
 ﻿using System.Threading.Channels;
+using WeCraft.Core.GameLogic;
 
-namespace WeCraft.Core.Game
+namespace WeCraftServer.Game
 {
     public class GameLogic: IGameLogic
     {
         public Channel<string> CommandChannel;
 
-        private IServer _server;
-        public GameLogic(IServer server)
+        private WeCraftServer _server;
+        public GameLogic(WeCraftServer server)
         {
             this._server = server;
         }

@@ -61,19 +61,33 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Block\Block.cs" />
         <Compile Include="Entity\Entity.cs" />
         <Compile Include="Entity\LivingEntity.cs" />
         <Compile Include="Entity\Player.cs" />
+        <Compile Include="EventHandler\EventHandler.cs" />
+        <Compile Include="EventHandler\EventNames.cs" />
+        <Compile Include="EventHandler\InvokableAction.cs" />
         <Compile Include="Exception\ChannelNotFoundException.cs" />
         <Compile Include="Exception\HandlerNotFoundException.cs" />
+        <Compile Include="GameLogic\IGameLogic.cs" />
+        <Compile Include="IWeCraftCore.cs" />
+        <Compile Include="Mod\IMod.cs" />
+        <Compile Include="Mod\IModManager.cs" />
+        <Compile Include="Mod\ModBase.cs" />
+        <Compile Include="Mod\ModId.cs" />
         <Compile Include="Network\C2S\C2S_Ping.cs" />
+        <Compile Include="Network\C2S\C2S_PlayerProfile.cs" />
         <Compile Include="Network\C2S\C2S_PlayerMovement.cs" />
+        <Compile Include="Network\C2S\C2S_QueryChunkData.cs" />
         <Compile Include="Network\Channel.cs" />
         <Compile Include="Network\Common\Vector3.cs" />
+        <Compile Include="Network\INetworkManager.cs" />
         <Compile Include="Network\NetworkHandler.cs" />
         <Compile Include="Network\Packet.cs" />
         <Compile Include="Network\PackId.cs" />
         <Compile Include="Network\S2C\S2C_Pong.cs" />
+        <Compile Include="Network\S2C\S2C_SpawnEntity.cs" />
         <Compile Include="Nullable\AllowNullAttribute.cs" />
         <Compile Include="Nullable\DisallowNullAttribute.cs" />
         <Compile Include="Nullable\DoesNotReturnAttribute.cs" />
@@ -86,7 +100,12 @@
         <Compile Include="Nullable\NotNullIfNotNullAttribute.cs" />
         <Compile Include="Nullable\NotNullWhenAttribute.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Util\PBUtil.cs" />
+        <Compile Include="Registery\BlockRegistery.cs" />
+        <Compile Include="Registery\EntityRegistery.cs" />
+        <Compile Include="Registery\IRegistrable.cs" />
+        <Compile Include="Registery\Registery.cs" />
+        <Compile Include="Utility\GenericObjectPool.cs" />
+        <Compile Include="Utility\ProtobufUtility.cs" />
         <Compile Include="WeCraftCore.cs" />
     </ItemGroup>
     <ItemGroup>

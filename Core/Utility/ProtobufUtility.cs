@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using ProtoBuf;
 
-namespace WeCraft.Core.Util
+namespace WeCraft.Core.Utility
 {
-    public static class PBUtil
+    public static class ProtobufUtility
     {
         public static byte[] Serialize<T>(T obj)
         {
@@ -16,7 +15,7 @@ namespace WeCraft.Core.Util
             }
             catch (System.Exception e)
             {
-                WeCraftCore.Logger.Error(e);
+                WeCraftCore.Instance.LoggerImpl.Error(e);
                 return new byte[]{};
             }
         }
@@ -34,7 +33,7 @@ namespace WeCraft.Core.Util
             }
             catch (System.Exception e)
             {
-                WeCraftCore.Logger.Error(e);
+                WeCraftCore.Instance.LoggerImpl.Error(e);
             }
 
             return default(T);

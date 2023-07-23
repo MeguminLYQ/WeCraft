@@ -3,6 +3,7 @@
     public class LivingEntity: Entity
     {
         public float Health;
-        public float MaxHealth;
+        public float MaxHealth; 
+        public float Yaw;
     }
 }

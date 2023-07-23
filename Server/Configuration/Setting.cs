@@ -1,4 +1,4 @@
-﻿namespace WeCraft.Core
+﻿namespace WeCraftServer.Configuration
 {
     public class Setting:ISetting
     {

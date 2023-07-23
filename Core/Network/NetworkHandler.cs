@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using WeCraft.Core.Network;
-using WeCraft.Core.Util;
+using WeCraft.Core.Utility;
 
-namespace WeCraft.Core
+namespace WeCraft.Core.Network
 {
     public class NetworkHandler
     {
@@ -13,7 +11,7 @@ namespace WeCraft.Core
         protected static HashSet<Channel> Channels = new HashSet<Channel>(){DefaultChannel};
         public delegate void Handle(ushort clientId,byte[] data);
 
-        internal NetworkHandler()
+        public NetworkHandler()
         {
         }
         public bool GetChannel(uint id,out Channel channel)
@@ -82,7 +80,7 @@ namespace WeCraft.Core
             }
             catch (System.Exception e)
             {
-                WeCraftCore.Logger.Error("自动注册失败, 似乎所有id已经注册满了?");
+                WeCraftCore.Instance.LoggerImpl.Error("自动注册失败, 似乎所有id已经注册满了?");
             }
             
             channel = new Channel(name,maxValue);
@@ -95,7 +93,7 @@ namespace WeCraft.Core
             Packet packet = new Packet();
             packet.Cmd = id;
             packet.Channel = chanId;
-            packet.Data = PBUtil.Serialize(data); 
+            packet.Data = ProtobufUtility.Serialize(data); 
             
             var cmd=BitConverter.GetBytes(packet.Cmd);
             var channel=BitConverter.GetBytes(packet.Channel);
@@ -137,15 +135,15 @@ namespace WeCraft.Core
         {
             if (!GetChannel(chanId, out Channel channel))
             {
-                WeCraftCore.Logger.Error($"网络找不到频道{chanId}");
+                WeCraftCore.Instance.LoggerImpl.Error($"网络找不到频道{chanId}");
                 return;
             }
             if (!channel.HandlePacket(clientId,packId, data))
             {
-                WeCraftCore.Logger.Error($"频道{chanId}找不到对应{packId}的处理器");
+                WeCraftCore.Instance.LoggerImpl.Error($"频道{chanId}找不到对应{packId}的处理器");
                 return;
             } 
-            WeCraftCore.Logger.Debug($"处理{chanId}:{packId}包");
+            WeCraftCore.Instance.LoggerImpl.Debug($"处理{chanId}:{packId}包");
         }
         
     }

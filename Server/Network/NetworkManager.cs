@@ -1,24 +1,23 @@
-﻿ 
-using System.Threading.Tasks;
-using WeCraft.Core;
-using WeCraft.Core.Util;
+﻿using System.Threading.Tasks;
 using NLog;
 using Riptide;
 using Riptide.Utils;
+using WeCraft.Core.Network;
+using WeCraft.Core.Utility;
 
-namespace WeCraft.Core.Network
+namespace WeCraftServer.Network
 {
     public class NetworkManager:INetworkManager
     { 
         public Riptide.Server EmbeddedServer { get; protected set; }
         public NetworkHandler Handler { get; protected set; }
         public Logger Logger;
-        private IServer _server;
-        public NetworkManager(IServer server)
+        private WeCraftServer _server;
+        public NetworkManager(WeCraftServer server)
         {
             this._server = server;
-            this.Handler = server.Core.Handler;
-            this.Logger = LogManager.GetCurrentClassLogger();
+            this.Handler = server.NetworkHandlerImpl;
+            this.Logger = LogManager.GetLogger("WeCraftServer.Network");
             RiptideLogger.Initialize(Logger.Debug,Logger.Info,Logger.Warn,Logger.Error,false);
             Task.Run(StartNetwork); 
         }
@@ -78,7 +77,7 @@ namespace WeCraft.Core.Network
                 : Message.Create(MessageSendMode.Unreliable,0);
             message.AddUShort(chanId);
             message.AddUShort(packId);
-            message.AddBytes(PBUtil.Serialize(data));
+            message.AddBytes(ProtobufUtility.Serialize(data));
             return message;
         }
         

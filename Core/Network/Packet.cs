@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WeCraft.Core
+﻿namespace WeCraft.Core.Network
 {
     public struct Packet
     {

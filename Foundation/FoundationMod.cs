@@ -1,18 +1,20 @@
-﻿using System.Threading.Channels;
-using WeCraft.Core;
-using Channel = WeCraft.Core.Network.Channel;
-
-namespace WeCraft.Core.Plugin
+﻿using WeCraft.Core;
+using WeCraft.Core.Mod;
+using WeCraft.Core.Network; 
+namespace WeCraft.Foundation
 {
-    public class RootPlugin: PluginBase
+    public class FoundationMod: ModBase
     {
-        public Network.Channel DefaultChannel = NetworkHandler.DefaultChannel;
+        public WeCraft.Core.Network.Channel DefaultChannel = NetworkHandler.DefaultChannel;
         public RootNetworkHandler Handler;
-
-        public RootPlugin()
+        public INetworkManager NetworkManager { get; set; }
+        public FoundationMod()
         {
-            Name = "Root";
+            Name = "Foundation";
+            NetworkManager = WeCraftCore.Instance.NetworkManagerImpl;
         }
+
+
         public override void OnLoad()
         {
         }

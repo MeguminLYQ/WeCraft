@@ -1,56 +1,86 @@
-﻿using System; 
+﻿using System;
 using System.Threading;
-using WeCraft.Core;
-using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 using NLog;
-using WeCraft.Core.Game;
+using WeCraft.Core;
 using WeCraft.Core.Network;
+using WeCraftServer.Configuration;
+using WeCraftServer.Mod;
+using WeCraftServer.Network;
 
-namespace WeCraft.Core
+namespace WeCraftServer
 {
-    internal class WeCraftServer
+    public class WeCraftServer: WeCraftCore
     {
-        public static WeCraftServer Instance { get; private set; }
-        public readonly ServiceProvider ServiceProvider;
-        public readonly IServer? Server;
-        public readonly ILogger? Logger;
-        public readonly WeCraft.Core.WeCraftCore? Core;
+        protected static WeCraftServer ServerInstance;
+        //todo: 这些以后可以用DI, 来让插件获取其他插件之类的.
+        public ISetting Setting { get; protected set; }
+        public CancellationTokenSource CancelToken { get; set; }
 
-        public WeCraftServer()
+        public readonly int MsPerTick; 
+
+        protected WeCraftServer()
         {
-            //初始化基础服务
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<ISetting, Setting>();
-            serviceCollection.AddSingleton<IServer,Server>(); 
-            serviceCollection.AddSingleton<ILogger>(LogManager.GetLogger("WeCraft"));
-            serviceCollection.AddSingleton<WeCraft.Core.WeCraftCore>(new WeCraft.Core.WeCraftCore());
-            ServiceProvider = serviceCollection.BuildServiceProvider(); 
-            Server = ServiceProvider.GetService<IServer>();
-            Logger = ServiceProvider.GetService<ILogger>();
-            Core = ServiceProvider.GetService<WeCraft.Core.WeCraftCore>();
-            if (this.Server == null)
+            //init value
+            this.Setting = new Setting();
+            this.LoggerImpl = LogManager.GetLogger("WeCraftServer"); 
+            this.CancelToken = new CancellationTokenSource();
+            this.MsPerTick = 1000 / this.Setting.TickRate;
+            this.IsServer = true;
+            //set up manager
+            this.GameLogicImpl = new global::WeCraftServer.Game.GameLogic(this);
+            this.NetworkManagerImpl = new NetworkManager(this);
+            this.ModManagerImpl = new ModManager(this);
+            this.NetworkHandlerImpl = new NetworkHandler();
+            this.CancelToken = new CancellationTokenSource();
+
+            (this.ModManagerImpl as ModManager).Load();
+
+        }
+
+        public static WeCraftServer GetInstance()
+        {
+            if (Instance == null)
             {
-                throw new System.Exception("错误,找不到合适的服务器实例");
+                var weCraftServer = new WeCraftServer();
+                Instance = weCraftServer;
+                ServerInstance = weCraftServer;
             }
 
-            if (this.Logger == null)
-            {
-                throw new System.Exception("错误,找不到合适的日志系统");
-            } 
+            return ServerInstance;
         }
-        public static void Main(string[] args)
+        
+        public void Run()
         {
-            Instance = new WeCraftServer();
-            Instance.Server?.Run();
-            Instance.ReadConsole();
+            LoggerImpl.Info($"Server is running on {Setting.Ip}:{Setting.Port}");
+            LoggerImpl.Info($"Tick-Rate {Setting.TickRate}");
+            LoggerImpl.Info($"Ms-Per-Tick {MsPerTick}");
+            Tick();
         }
 
-        private void ReadConsole()
+        public void Stop()
         {
-            while (true)
+            CancelToken.Cancel();
+        }
+
+        public void Restart()
+        {
+            throw new System.NotImplementedException();
+        }
+        public async void Tick()
+        {
+            DateTime nextLoop = DateTime.Now;
+            while (!CancelToken.IsCancellationRequested)
             {
-                Console.WriteLine(Console.ReadLine());
-                Thread.Sleep(50);
+                while (nextLoop<DateTime.Now)
+                { 
+                    GameLogicImpl.Tick();
+                    nextLoop = nextLoop.AddMilliseconds(MsPerTick);
+                    if (nextLoop > DateTime.Now)
+                    {
+                        await Task.Delay(nextLoop - DateTime.Now);
+                    }
+                }
             }
         }
     }
