@@ -1,8 +1,7 @@
 ﻿namespace WeCraft.Core.EventHandler
 {
-    public class EventNames
-    {
+    public static class LoggerName
+    { 
         public const string OnPlayerJoin = "OnPlayerJoin";
-        public const string OnPlayerLogin = "OnPlayerLogin";
     }
 }

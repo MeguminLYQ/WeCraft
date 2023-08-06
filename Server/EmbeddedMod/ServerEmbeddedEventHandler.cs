@@ -1,5 +1,8 @@
 ﻿using System;
 using WeCraft.Core.Entity;
+using WeCraft.Core.Event;
+using WeCraft.Core.EventHandler;
+using WeCraftServer.Event.Player;
 
 namespace WeCraftServer.EmbeddedMod
 {
@@ -12,10 +15,14 @@ namespace WeCraftServer.EmbeddedMod
             this.mod = mod;
         }
 
-        public void OnPlayerQuit(Player player)
+        public void OnPlayerJoin(PlayerJoinEvent @event)
         {
-            mod.Logger.Info($"{player.Name} 离开服务器");
-            
+            mod.Logger.Info($"{@event.Player.Name} 加入服务器");
         }
+        
+        public void OnPlayerQuit(PlayerQuitEvent @event){ 
+            mod.Logger.Info($"{@event.Player.Name} 退出服务器");
+        }
+        
     }
 }

@@ -79,6 +79,9 @@
         <Compile Include="EmbeddedMod\ServerEmbeddedEventHandler.cs" />
         <Compile Include="EmbeddedMod\ServerEmbeddedMod.cs" />
         <Compile Include="EmbeddedMod\ServerEmbeddedNetworkHandler.cs" />
+        <Compile Include="Event\Player\PlayerJoinEvent.cs" />
+        <Compile Include="Event\Player\PlayerKickEvent.cs" />
+        <Compile Include="Event\Player\PlayerQuitEvent.cs" />
         <Compile Include="Game\GameLogic.cs" />
         <Compile Include="ITickable.cs" />
         <Compile Include="Network\NetworkManager.cs" />
@@ -100,6 +103,8 @@
         <Compile Include="Configuration\IConfiguration.cs" />
         <Compile Include="Configuration\Configuration.cs" />
         <Compile Include="Utility\ConnectionComparer.cs" />
+        <Compile Include="Utility\ConnectionExt.cs" />
+        <Compile Include="Utility\PlayerExt.cs" />
         <Compile Include="WeCraftServer.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -123,6 +128,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Event\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

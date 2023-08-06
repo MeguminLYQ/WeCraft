@@ -12,8 +12,7 @@ namespace Tests
         private static string input;
         private static IPEndPoint remote = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 25567);
         static void Main(string[] args)
-        { 
- 
+        {  
         }
  
     }

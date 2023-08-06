@@ -1,4 +1,4 @@
-﻿namespace WeCraft.Core.EventHandler
+﻿namespace WeCraft.Core.Event
 {
     public enum EventResult: byte
     {

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using NLog;
+using WeCraft.Core.Event;
 using WeCraft.Core.GameLogic;
 using WeCraft.Core.Mod;
 using WeCraft.Core.Network;
@@ -15,7 +16,7 @@ namespace WeCraft.Core
         public ILogger LoggerImpl { get; protected set; } 
         public IGameLogic GameLogicImpl { get; protected set; }
         public NetworkHandler NetworkHandlerImpl { get; protected set; }
-        public EventHandler.EventHandler EventHandler { get; protected set; }
+        public EventBus EventBus { get; protected set; }
         public bool IsClient { get; protected set; }
         public bool IsHost { get; protected set; }
         public bool IsServer { get; protected set; }

@@ -7,7 +7,7 @@ namespace WeCraft.Core.Mod
     {
         public string Domain;
         
-        private ModId()
+        public ModId()
         {
             
         }

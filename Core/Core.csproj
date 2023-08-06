@@ -63,20 +63,20 @@
     <ItemGroup>
         <Compile Include="Block\Block.cs" />
         <Compile Include="Block\BlockDefiniation.cs" />
+        <Compile Include="Constrant\EventName.cs" />
+        <Compile Include="Constrant\LoggerName.cs" />
         <Compile Include="Entity\Entity.cs" />
         <Compile Include="Entity\EntityDefinition.cs" />
         <Compile Include="Entity\IPlayer.cs" />
         <Compile Include="Entity\LivingEntity.cs" />
         <Compile Include="Entity\NpcEntity.cs" />
         <Compile Include="Entity\Player.cs" />
-        <Compile Include="EventHandler\Event.cs" />
-        <Compile Include="EventHandler\EventHandler.cs" />
-        <Compile Include="EventHandler\EventNames.cs" />
-        <Compile Include="EventHandler\EventPriority.cs" />
-        <Compile Include="EventHandler\EventResult.cs" />
-        <Compile Include="EventHandler\ICancellable.cs" />
-        <Compile Include="EventHandler\InvokableAction.cs" />
-        <Compile Include="EventHandler\PlayerJoinEvent.cs" />
+        <Compile Include="Event\EventBase.cs" />
+        <Compile Include="Event\EventBus.cs" />
+        <Compile Include="Event\EventHandler.cs" />
+        <Compile Include="Event\EventPriority.cs" />
+        <Compile Include="Event\EventResult.cs" />
+        <Compile Include="Event\ExecuteDelegate.cs" />
         <Compile Include="Exception\ChannelNotFoundException.cs" />
         <Compile Include="Exception\HandlerNotFoundException.cs" />
         <Compile Include="GameLogic\IGameLogic.cs" />
@@ -125,6 +125,7 @@
         <Compile Include="Registery\Registery.cs" />
         <Compile Include="Utility\GenericObjectPool.cs" />
         <Compile Include="Utility\ProtobufUtility.cs" />
+        <Compile Include="Utility\TypeHelper.cs" />
         <Compile Include="WeCraftCore.cs" />
         <Compile Include="World\Chunk.cs" />
         <Compile Include="World\World.cs" />
@@ -136,7 +137,7 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="EventHandler\todo.md" />
+      <Content Include="Event\todo.md" />
       <Content Include="World\世界设计.md" />
     </ItemGroup>
     <ItemGroup>

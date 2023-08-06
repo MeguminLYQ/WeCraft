@@ -4,7 +4,7 @@ using WeCraft.Core.C2S;
 namespace WeCraft.Core.Entity
 {
     public class Player: LivingEntity,IPlayer
-    {
+    {  
         protected Player(uint id) : base(id)
         {
         }

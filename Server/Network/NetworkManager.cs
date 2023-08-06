@@ -5,9 +5,11 @@ using NLog;
 using Riptide;
 using Riptide.Utils;
 using WeCraft.Core.Entity;
+using WeCraft.Core.Event;
+using WeCraft.Core.EventHandler;
 using WeCraft.Core.Network;
 using WeCraft.Core.Utility;
-using EventHandler = WeCraft.Core.EventHandler.EventHandler;
+using WeCraftServer.Event.Player;
 
 namespace WeCraftServer.Network
 {
@@ -44,7 +46,8 @@ namespace WeCraftServer.Network
                 switch (e.Reason)
                 {
                     case DisconnectReason.Disconnected:
-                        EventHandler.ExecuteEvent<Player>(ServerEventNames.OnPlayerDisconnected,player);
+                        PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(player);
+                        EventBus.Post(playerQuitEvent);
                         break;
                 }
             };
