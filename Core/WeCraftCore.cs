@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using NLog;
+﻿
 using WeCraft.Core.Event;
 using WeCraft.Core.GameLogic;
 using WeCraft.Core.Mod;

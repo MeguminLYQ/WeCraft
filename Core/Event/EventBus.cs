@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using NLog; 
+using System.Collections.Generic; 
 using WeCraft.Core.Mod;
 using WeCraft.Core.Utility;
 

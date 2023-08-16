@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using NLog;
 using WeCraft.Core.Mod;
 
 namespace WeCraft.Core.Registery
